@@ -5,14 +5,11 @@ import {
     Typography,
     useMediaQuery,
 } from '@mui/material'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import pdfGenerator from '../assets/pdfGenerator'
 import AlertContext from './AlertContext'
-
-const typographyStyle = {
-    textAlign: 'center',
-}
+import ToggleButtons from './ToggleButtons'
 
 function Summary({ form, setForm }) {
     const bonus = JSON.parse(localStorage.getItem('bonus')) || []
@@ -21,6 +18,11 @@ function Summary({ form, setForm }) {
     const forms = JSON.parse(localStorage.getItem('forms')) || []
 
     const media = useMediaQuery('(min-width:450px)')
+    const [alignment, setAlignment] = useState('left')
+
+    const typographyStyle = {
+        textAlign: alignment,
+    }
 
     const navigate = useNavigate()
     const { setOpen, setMessage, setType } = useContext(AlertContext)
@@ -89,9 +91,14 @@ function Summary({ form, setForm }) {
             <Container
                 sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
             >
-                <Typography sx={{ ...typographyStyle, mb: 2 }} variant="h4">
+                <Typography sx={{ textAlign: 'center', mb: 2 }} variant="h4">
                     {form.title.toUpperCase()}
                 </Typography>
+
+                <ToggleButtons
+                    alignment={alignment}
+                    setAlignment={setAlignment}
+                />
 
                 <Box>
                     <Typography sx={typographyStyle} variant="h6">
@@ -155,7 +162,9 @@ function Summary({ form, setForm }) {
                 }
             >
                 <Button onClick={() => navigate('/')}>Voltar</Button>
-                <Button onClick={() => pdfGenerator(form)}>Exportar pdf</Button>
+                <Button onClick={() => pdfGenerator(form, alignment)}>
+                    Exportar pdf
+                </Button>
                 <Button onClick={handleSave}>Salvar</Button>
             </Box>
         </Container>

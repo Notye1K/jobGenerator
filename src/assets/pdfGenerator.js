@@ -1,7 +1,7 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 
-function pdfGenerator(form) {
+function pdfGenerator(form, alignment) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs
 
     const docDefinitions = {
@@ -31,15 +31,17 @@ function pdfGenerator(form) {
                 alignment: 'center',
                 fontSize: 30,
                 bold: true,
-                margin: [0, 10, 0, 70],
+                margin: [0, 10, 0, 90],
             },
             subtitle: {
                 fontSize: 20,
                 bold: true,
+                alignment,
             },
             content: {
                 fontSize: 15,
                 margin: [0, 10, 0, 30],
+                alignment,
             },
         },
     }
