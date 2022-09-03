@@ -10,6 +10,23 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AlertContext from './AlertContext'
 
+function formValidation(finalForm) {
+    if (!finalForm.experience) {
+        finalForm.experience = 'Nenhuma experiência é necessária'
+    }
+    if (finalForm.skills.length === 0) {
+        finalForm.skills = ['Nenhuma habilidade especial é necessária']
+    }
+    if (finalForm.bonus.length === 0) {
+        finalForm.bonus = ['Esse cargo não oferece nenhum benefício']
+    }
+}
+
+const renderTag = (value, getTagProps) =>
+    value.map((option, index) => (
+        <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+    ))
+
 function Form({ form, setForm }) {
     const bonus = JSON.parse(localStorage.getItem('bonus')) || [
         'Esse cargo não oferece nenhum benefício',
@@ -22,7 +39,6 @@ function Form({ form, setForm }) {
     ]
 
     const navigate = useNavigate()
-
     const { setOpen, setMessage, setType } = useContext(AlertContext)
 
     function handleChange(name) {
@@ -44,18 +60,11 @@ function Form({ form, setForm }) {
             return
         }
         const finalForm = form
-        if (!form.experience) {
-            finalForm.experience = 'Nenhuma experiência é necessária'
-        }
-        if (form.skills.length === 0) {
-            finalForm.skills = ['Nenhuma habilidade especial é necessária']
-        }
-        if (form.bonus.length === 0) {
-            finalForm.bonus = ['Esse cargo não oferece nenhum benefício']
-        }
+        formValidation(finalForm)
         setForm({ ...finalForm })
         navigate('/resumo')
     }
+
     return (
         <Container
             component="form"
@@ -100,15 +109,7 @@ function Form({ form, setForm }) {
                 onChange={handleChange('bonus')}
                 defaultValue={['Entrevista com RH']}
                 freeSolo
-                renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                        <Chip
-                            variant="outlined"
-                            label={option}
-                            {...getTagProps({ index })}
-                        />
-                    ))
-                }
+                renderTags={renderTag}
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -126,15 +127,7 @@ function Form({ form, setForm }) {
                 onChange={handleChange('phases')}
                 defaultValue={[]}
                 freeSolo
-                renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                        <Chip
-                            variant="outlined"
-                            label={option}
-                            {...getTagProps({ index })}
-                        />
-                    ))
-                }
+                renderTags={renderTag}
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -152,15 +145,7 @@ function Form({ form, setForm }) {
                 onChange={handleChange('skills')}
                 defaultValue={[]}
                 freeSolo
-                renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                        <Chip
-                            variant="outlined"
-                            label={option}
-                            {...getTagProps({ index })}
-                        />
-                    ))
-                }
+                renderTags={renderTag}
                 renderInput={(params) => (
                     <TextField
                         {...params}

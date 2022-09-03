@@ -10,6 +10,10 @@ import { useNavigate } from 'react-router-dom'
 import pdfGenerator from '../assets/pdfGenerator'
 import AlertContext from './AlertContext'
 
+const typographyStyle = {
+    textAlign: 'center',
+}
+
 function Summary({ form, setForm }) {
     const bonus = JSON.parse(localStorage.getItem('bonus')) || []
     const phases = JSON.parse(localStorage.getItem('phases')) || []
@@ -35,40 +39,26 @@ function Summary({ form, setForm }) {
         })
     }, [])
 
+    function localSave(array, name) {
+        const hashTable = {}
+        array.forEach((element) => {
+            hashTable[element] = true
+        })
+        form[name].forEach((formElement) => {
+            if (!hashTable[formElement]) {
+                array.push(formElement)
+            }
+        })
+        localStorage.setItem(name, JSON.stringify(array))
+    }
+
     function handleSave() {
         try {
-            let hashTable = {}
-            bonus.forEach((bonus) => {
-                hashTable[bonus] = true
-            })
-            form.bonus.forEach((formBonus) => {
-                if (!hashTable[formBonus]) {
-                    bonus.push(formBonus)
-                }
-            })
-            localStorage.setItem('bonus', JSON.stringify(bonus))
+            localSave(bonus, 'bonus')
 
-            hashTable = {}
-            phases.forEach((phase) => {
-                hashTable[phase] = true
-            })
-            form.phases.forEach((formPhase) => {
-                if (!hashTable[formPhase]) {
-                    phases.push(formPhase)
-                }
-            })
-            localStorage.setItem('phases', JSON.stringify(phases))
+            localSave(phases, 'phases')
 
-            hashTable = {}
-            skills.forEach((skill) => {
-                hashTable[skill] = true
-            })
-            form.skills.forEach((formskill) => {
-                if (!hashTable[formskill]) {
-                    skills.push(formskill)
-                }
-            })
-            localStorage.setItem('skills', JSON.stringify(skills))
+            localSave(skills, 'skills')
 
             const newForms = forms.filter(
                 (localForm) => localForm.title !== form.title
@@ -94,55 +84,55 @@ function Summary({ form, setForm }) {
             <Container
                 sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}
             >
-                <Typography sx={{ textAlign: 'center' }} variant="h4">
+                <Typography sx={typographyStyle} variant="h4">
                     {form.title.toUpperCase()}
                 </Typography>
             </Container>
             <Box>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Salário:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
+                <Typography variant="subtitle1" sx={typographyStyle}>
                     R$: {form.salary}
                 </Typography>
             </Box>
             <Box>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Atividades do dia a dia:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
+                <Typography variant="subtitle1" sx={typographyStyle}>
                     {form.activity}
                 </Typography>
             </Box>
             <Box>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Benefícios:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
-                    {form.bonus.join(' - ')}
+                <Typography variant="subtitle1" sx={typographyStyle}>
+                    {form.bonus.join(' + ')}
                 </Typography>
             </Box>
             <Box>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Fases do processo:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
+                <Typography variant="subtitle1" sx={typographyStyle}>
                     {form.phases.join(' => ')}
                 </Typography>
             </Box>
             <Box>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Habilidades necessárias:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
-                    {form.skills.join(', ')}
+                <Typography variant="subtitle1" sx={typographyStyle}>
+                    {form.skills.join(' - ')}
                 </Typography>
             </Box>
             <Box sx={{ mb: 2 }}>
-                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                <Typography sx={typographyStyle} variant="h6">
                     Experiência necessária:
                 </Typography>
-                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
+                <Typography variant="subtitle1" sx={typographyStyle}>
                     {form.experience}
                 </Typography>
             </Box>
@@ -159,7 +149,7 @@ function Summary({ form, setForm }) {
             >
                 <Button onClick={() => navigate('/')}>Voltar</Button>
                 <Button onClick={() => pdfGenerator(form)}>Exportar pdf</Button>
-                <Button onClick={handleSave}>Salvar</Button>
+                <Button sx={{mb: 1}} onClick={handleSave}>Salvar</Button>
             </Box>
         </Container>
     )

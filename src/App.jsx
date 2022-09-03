@@ -6,23 +6,23 @@ import Form from './components/Form'
 import Header from './components/Header'
 import Summary from './components/Summary'
 
-function App() {
-    const emptyForm = {
-        title: '',
-        salary: '',
-        bonus: [],
-        activity: '',
-        phases: [],
-        skills: [],
-        experience: '',
-    }
+const emptyForm = {
+    title: '',
+    salary: '',
+    bonus: [],
+    activity: '',
+    phases: [],
+    skills: [],
+    experience: '',
+}
 
+function App() {
     const [form, setForm] = useState(emptyForm)
 
     return (
         <BrowserRouter>
             <AlertProvider>
-                <Box sx={{ height: '100vh' }}>
+                <Box sx={{ height: '95vh' }}>
                     <Header setForm={setForm} emptyForm={emptyForm} />
                     <Routes>
                         <Route

@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 
-const style = {
+const bigBoxStyle = {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -40,7 +40,7 @@ export default function FormsModal({ setForm }) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={bigBoxStyle}>
                     <Typography
                         id="modal-modal-title"
                         variant="h6"
