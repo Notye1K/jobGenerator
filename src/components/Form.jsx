@@ -1,5 +1,6 @@
 import {
     Autocomplete,
+    Box,
     Button,
     Chip,
     Container,
@@ -68,100 +69,107 @@ function Form({ form, setForm }) {
     return (
         <Container
             component="form"
-            sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                minHeight: '85%',
+            }}
             onSubmit={handleSubmit}
         >
-            <TextField
-                id="outlined-basic"
-                label="Título do cargo"
-                variant="outlined"
-                onChange={handleChange('title')}
-                value={form.title}
-                required
-            />
-            <TextField
-                value={form.salary}
-                onChange={handleChange('salary')}
-                label="Salário"
-                id="outlined-start-adornment"
-                type="number"
-                required
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">R$</InputAdornment>
-                    ),
-                }}
-            />
-            <TextField
-                id="outlined-basic"
-                label="Atividade que o cargo exerce"
-                variant="outlined"
-                multiline
-                value={form.activity}
-                onChange={handleChange('activity')}
-                required
-            />
-            <Autocomplete
-                multiple
-                id="tags-filled"
-                options={bonus.map((bonus) => bonus)}
-                value={form.bonus}
-                onChange={handleChange('bonus')}
-                defaultValue={['Entrevista com RH']}
-                freeSolo
-                renderTags={renderTag}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        variant="outlined"
-                        label="Benefícios do cargo"
-                    />
-                )}
-            />
-            <Autocomplete
-                multiple
-                required
-                id="tags-filled"
-                options={phases.map((phase) => phase)}
-                value={form.phases}
-                onChange={handleChange('phases')}
-                defaultValue={[]}
-                freeSolo
-                renderTags={renderTag}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        variant="outlined"
-                        label="Etapas do processo"
-                    />
-                )}
-            />
-            <Autocomplete
-                multiple
-                required
-                id="tags-filled"
-                options={skills.map((skill) => skill)}
-                value={form.skills}
-                onChange={handleChange('skills')}
-                defaultValue={[]}
-                freeSolo
-                renderTags={renderTag}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        variant="outlined"
-                        label="Habilidades necessárias"
-                    />
-                )}
-            />
-            <TextField
-                id="outlined-basic"
-                label="Experiência necessária"
-                value={form.experience}
-                onChange={handleChange('experience')}
-                variant="outlined"
-            />
-            <Button sx={{ mt: 2 }} type="submit">
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <TextField
+                    id="outlined-basic"
+                    label="Título do cargo"
+                    variant="outlined"
+                    onChange={handleChange('title')}
+                    value={form.title}
+                    required
+                />
+                <TextField
+                    value={form.salary}
+                    onChange={handleChange('salary')}
+                    label="Salário"
+                    id="outlined-start-adornment"
+                    type="number"
+                    required
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">R$</InputAdornment>
+                        ),
+                    }}
+                />
+                <TextField
+                    id="outlined-basic"
+                    label="Atividade que o cargo exerce"
+                    variant="outlined"
+                    multiline
+                    value={form.activity}
+                    onChange={handleChange('activity')}
+                    required
+                />
+                <Autocomplete
+                    multiple
+                    id="tags-filled"
+                    options={bonus.map((bonus) => bonus)}
+                    value={form.bonus}
+                    onChange={handleChange('bonus')}
+                    defaultValue={['Entrevista com RH']}
+                    freeSolo
+                    renderTags={renderTag}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Benefícios do cargo"
+                        />
+                    )}
+                />
+                <Autocomplete
+                    multiple
+                    required
+                    id="tags-filled"
+                    options={phases.map((phase) => phase)}
+                    value={form.phases}
+                    onChange={handleChange('phases')}
+                    defaultValue={[]}
+                    freeSolo
+                    renderTags={renderTag}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Etapas do processo"
+                        />
+                    )}
+                />
+                <Autocomplete
+                    multiple
+                    required
+                    id="tags-filled"
+                    options={skills.map((skill) => skill)}
+                    value={form.skills}
+                    onChange={handleChange('skills')}
+                    defaultValue={[]}
+                    freeSolo
+                    renderTags={renderTag}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="outlined"
+                            label="Habilidades necessárias"
+                        />
+                    )}
+                />
+                <TextField
+                    id="outlined-basic"
+                    label="Experiência necessária"
+                    value={form.experience}
+                    onChange={handleChange('experience')}
+                    variant="outlined"
+                />
+            </Box>
+            <Button sx={{ my: 2 }} type="submit">
                 Avançar
             </Button>
         </Container>

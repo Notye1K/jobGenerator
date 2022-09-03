@@ -79,63 +79,69 @@ function Summary({ form, setForm }) {
 
     return (
         <Container
-            sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-around',
+                minHeight: '85%',
+            }}
         >
             <Container
-                sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}
+                sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
             >
-                <Typography sx={typographyStyle} variant="h4">
+                <Typography sx={{ ...typographyStyle, mb: 2 }} variant="h4">
                     {form.title.toUpperCase()}
                 </Typography>
+
+                <Box>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Salário:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        R$: {form.salary}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Atividades do dia a dia:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        {form.activity}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Benefícios:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        {form.bonus.join(' + ')}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Fases do processo:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        {form.phases.join(' => ')}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Habilidades necessárias:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        {form.skills.join(' - ')}
+                    </Typography>
+                </Box>
+                <Box sx={{ mb: 2 }}>
+                    <Typography sx={typographyStyle} variant="h6">
+                        Experiência necessária:
+                    </Typography>
+                    <Typography variant="subtitle1" sx={typographyStyle}>
+                        {form.experience}
+                    </Typography>
+                </Box>
             </Container>
-            <Box>
-                <Typography sx={typographyStyle} variant="h6">
-                    Salário:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    R$: {form.salary}
-                </Typography>
-            </Box>
-            <Box>
-                <Typography sx={typographyStyle} variant="h6">
-                    Atividades do dia a dia:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    {form.activity}
-                </Typography>
-            </Box>
-            <Box>
-                <Typography sx={typographyStyle} variant="h6">
-                    Benefícios:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    {form.bonus.join(' + ')}
-                </Typography>
-            </Box>
-            <Box>
-                <Typography sx={typographyStyle} variant="h6">
-                    Fases do processo:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    {form.phases.join(' => ')}
-                </Typography>
-            </Box>
-            <Box>
-                <Typography sx={typographyStyle} variant="h6">
-                    Habilidades necessárias:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    {form.skills.join(' - ')}
-                </Typography>
-            </Box>
-            <Box sx={{ mb: 2 }}>
-                <Typography sx={typographyStyle} variant="h6">
-                    Experiência necessária:
-                </Typography>
-                <Typography variant="subtitle1" sx={typographyStyle}>
-                    {form.experience}
-                </Typography>
-            </Box>
             <Box
                 sx={
                     media
@@ -143,13 +149,14 @@ function Summary({ form, setForm }) {
                               display: 'flex',
                               justifyContent: 'space-between',
                               alignItems: 'center',
+                              my: 2,
                           }
-                        : { display: 'flex', flexDirection: 'column' }
+                        : { display: 'flex', flexDirection: 'column', my: 2 }
                 }
             >
                 <Button onClick={() => navigate('/')}>Voltar</Button>
                 <Button onClick={() => pdfGenerator(form)}>Exportar pdf</Button>
-                <Button sx={{mb: 1}} onClick={handleSave}>Salvar</Button>
+                <Button onClick={handleSave}>Salvar</Button>
             </Box>
         </Container>
     )
