@@ -79,7 +79,7 @@ function Form({ form, setForm }) {
         >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <TextField
-                    id="outlined-basic"
+                    id="title"
                     label="Título do cargo"
                     variant="outlined"
                     onChange={handleChange('title')}
@@ -90,7 +90,7 @@ function Form({ form, setForm }) {
                     value={form.salary}
                     onChange={handleChange('salary')}
                     label="Salário"
-                    id="outlined-start-adornment"
+                    id="salary"
                     type="number"
                     required
                     InputProps={{
@@ -100,7 +100,7 @@ function Form({ form, setForm }) {
                     }}
                 />
                 <TextField
-                    id="outlined-basic"
+                    id="activity"
                     label="Atividade que o cargo exerce"
                     variant="outlined"
                     multiline
@@ -110,7 +110,7 @@ function Form({ form, setForm }) {
                 />
                 <Autocomplete
                     multiple
-                    id="tags-filled"
+                    id="bonus"
                     options={bonus.map((bonus) => bonus)}
                     value={form.bonus}
                     onChange={handleChange('bonus')}
@@ -128,7 +128,7 @@ function Form({ form, setForm }) {
                 <Autocomplete
                     multiple
                     required
-                    id="tags-filled"
+                    id="phases"
                     options={phases.map((phase) => phase)}
                     value={form.phases}
                     onChange={handleChange('phases')}
@@ -146,7 +146,7 @@ function Form({ form, setForm }) {
                 <Autocomplete
                     multiple
                     required
-                    id="tags-filled"
+                    id="skills"
                     options={skills.map((skill) => skill)}
                     value={form.skills}
                     onChange={handleChange('skills')}
@@ -162,7 +162,7 @@ function Form({ form, setForm }) {
                     )}
                 />
                 <TextField
-                    id="outlined-basic"
+                    id="experience"
                     label="Experiência necessária"
                     value={form.experience}
                     onChange={handleChange('experience')}
