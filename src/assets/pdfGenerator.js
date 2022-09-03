@@ -9,14 +9,14 @@ function pdfGenerator(form) {
 
         content: [
             { text: form.title.toUpperCase(), style: 'title' },
-            { text: `Salario:`, style: 'subtitle' },
+            { text: `Salário:`, style: 'subtitle' },
             { text: 'R$: ' + form.salary, style: 'content' },
             {
                 text: `Atividades do dia a dia:`,
                 style: 'subtitle',
             },
             { text: form.activity, style: 'content' },
-            { text: `Beneficios:`, style: 'subtitle' },
+            { text: `Benefícios:`, style: 'subtitle' },
             { text: form.bonus.join(' - '), style: 'content' },
             { text: `Fases do processo:`, style: 'subtitle' },
             { text: form.phases.join(' => '), style: 'content' },

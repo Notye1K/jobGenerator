@@ -6,14 +6,24 @@ import {
     InputAdornment,
     TextField,
 } from '@mui/material'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AlertContext from './AlertContext'
 
 function Form({ form, setForm }) {
-    const bonus = JSON.parse(localStorage.getItem('bonus')) || []
-    const phases = JSON.parse(localStorage.getItem('phases')) || []
-    const skills = JSON.parse(localStorage.getItem('skills')) || []
+    const bonus = JSON.parse(localStorage.getItem('bonus')) || [
+        'Esse cargo não oferece nenhum benefício',
+    ]
+    const phases = JSON.parse(localStorage.getItem('phases')) || [
+        'Entrevista com RH',
+    ]
+    const skills = JSON.parse(localStorage.getItem('skills')) || [
+        'Nenhuma habilidade especial é necessária',
+    ]
 
     const navigate = useNavigate()
+
+    const { setOpen, setMessage, setType } = useContext(AlertContext)
 
     function handleChange(name) {
         return (event, newValue) => {
@@ -27,6 +37,23 @@ function Form({ form, setForm }) {
 
     function handleSubmit(event) {
         event.preventDefault()
+        if (form.phases.length === 0) {
+            setMessage('Preencha pelo menos uma etapa')
+            setType('error')
+            setOpen(true)
+            return
+        }
+        const finalForm = form
+        if (!form.experience) {
+            finalForm.experience = 'Nenhuma experiência é necessária'
+        }
+        if (form.skills.length === 0) {
+            finalForm.skills = ['Nenhuma habilidade especial é necessária']
+        }
+        if (form.bonus.length === 0) {
+            finalForm.bonus = ['Esse cargo não oferece nenhum benefício']
+        }
+        setForm({ ...finalForm })
         navigate('/resumo')
     }
     return (
@@ -71,7 +98,7 @@ function Form({ form, setForm }) {
                 options={bonus.map((bonus) => bonus)}
                 value={form.bonus}
                 onChange={handleChange('bonus')}
-                defaultValue={[]}
+                defaultValue={['Entrevista com RH']}
                 freeSolo
                 renderTags={(value, getTagProps) =>
                     value.map((option, index) => (
@@ -86,7 +113,7 @@ function Form({ form, setForm }) {
                     <TextField
                         {...params}
                         variant="outlined"
-                        label="Beneficios do cargo"
+                        label="Benefícios do cargo"
                     />
                 )}
             />
@@ -144,7 +171,7 @@ function Form({ form, setForm }) {
             />
             <TextField
                 id="outlined-basic"
-                label="Experiência necessaria"
+                label="Experiência necessária"
                 value={form.experience}
                 onChange={handleChange('experience')}
                 variant="outlined"

@@ -116,7 +116,7 @@ function Summary({ form, setForm }) {
             </Box>
             <Box>
                 <Typography sx={{ textAlign: 'center' }} variant="h6">
-                    Beneficios:
+                    Benefícios:
                 </Typography>
                 <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.bonus.join(' - ')}
