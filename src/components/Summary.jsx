@@ -1,4 +1,10 @@
-import { Box, Button, Container, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    Container,
+    Typography,
+    useMediaQuery,
+} from '@mui/material'
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import pdfGenerator from '../assets/pdfGenerator'
@@ -10,8 +16,10 @@ function Summary({ form, setForm }) {
     const skills = JSON.parse(localStorage.getItem('skills')) || []
     const forms = JSON.parse(localStorage.getItem('forms')) || []
 
+    const media = useMediaQuery('(min-width:450px)')
+
     const navigate = useNavigate()
-    const { setOpen, setMessage } = useContext(AlertContext)
+    const { setOpen, setMessage, setType } = useContext(AlertContext)
 
     useEffect(() => {
         if (!form.title || !form.salary || !form.activity) {
@@ -83,48 +91,76 @@ function Summary({ form, setForm }) {
         <Container
             sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
         >
-            <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography variant="h3">{form.title.toUpperCase()}</Typography>
+            <Container
+                sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}
+            >
+                <Typography sx={{ textAlign: 'center' }} variant="h4">
+                    {form.title.toUpperCase()}
+                </Typography>
             </Container>
             <Box>
-                <Typography variant="h6">Salário:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Salário:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     R$: {form.salary}
                 </Typography>
             </Box>
             <Box>
-                <Typography variant="h6">Atividades do dia a dia:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Atividades do dia a dia:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.activity}
                 </Typography>
             </Box>
             <Box>
-                <Typography variant="h6">Beneficios:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Beneficios:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.bonus.join(' - ')}
                 </Typography>
             </Box>
             <Box>
-                <Typography variant="h6">Fases do processo:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Fases do processo:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.phases.join(' => ')}
                 </Typography>
             </Box>
             <Box>
-                <Typography variant="h6">Habilidades necessárias:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Habilidades necessárias:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.skills.join(', ')}
                 </Typography>
             </Box>
-            <Box>
-                <Typography variant="h6">Experiência necessária:</Typography>
-                <Typography variant="subtitle1" sx={{ marginLeft: '20px' }}>
+            <Box sx={{ mb: 2 }}>
+                <Typography sx={{ textAlign: 'center' }} variant="h6">
+                    Experiência necessária:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {form.experience}
                 </Typography>
             </Box>
-            <Button onClick={() => navigate('/')}>Voltar</Button>
-            <Button onClick={handleSave}>Salvar</Button>
-            <Button onClick={() => pdfGenerator(form)}>Exportar pdf</Button>
+            <Box
+                sx={
+                    media
+                        ? {
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                          }
+                        : { display: 'flex', flexDirection: 'column' }
+                }
+            >
+                <Button onClick={() => navigate('/')}>Voltar</Button>
+                <Button onClick={() => pdfGenerator(form)}>Exportar pdf</Button>
+                <Button onClick={handleSave}>Salvar</Button>
+            </Box>
         </Container>
     )
 }

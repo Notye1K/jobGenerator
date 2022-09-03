@@ -2,6 +2,7 @@ import { Container } from '@mui/system'
 import { useNavigate } from 'react-router-dom'
 import NewFormModal from './NewFormModal'
 import donaMaria from '../assets/dona-maria.png'
+import FormsModal from './FormsModal'
 
 function Header({ setForm, emptyForm }) {
     const navigate = useNavigate()
@@ -16,12 +17,11 @@ function Header({ setForm, emptyForm }) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                mb: 5,
+                mb: 3,
             }}
         >
-            <NewFormModal handleClick={handleClick}>
-                Novo formulario
-            </NewFormModal>
+            <NewFormModal handleClick={handleClick} />
+            <FormsModal setForm={setForm} />
             <img src={donaMaria} style={{ width: '100px' }} alt="dona maria" />
         </Container>
     )

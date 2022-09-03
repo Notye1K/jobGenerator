@@ -149,7 +149,9 @@ function Form({ form, setForm }) {
                 onChange={handleChange('experience')}
                 variant="outlined"
             />
-            <Button type="submit">Avançar</Button>
+            <Button sx={{ mt: 2 }} type="submit">
+                Avançar
+            </Button>
         </Container>
     )
 }
