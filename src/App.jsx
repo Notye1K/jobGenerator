@@ -16,15 +16,15 @@ function App() {
         experience: '',
     }
     const test = {
-        title: 'Front',
+        title: 'Atendente de balcão',
         salary: '6000',
-        bonus: ['saude', 'educação'],
-        activity: 'codar o dia inteiro e pesquisar',
-        phases: ['entrevista', 'propsta'],
-        skills: ['softSkill', 'hardSkill'],
-        experience: '1 mês',
+        bonus: ['Seguro de vida', 'Folga no aniversário'],
+        activity: 'Atender clientes no balcão',
+        phases: ['Entrevista', 'Proposta'],
+        skills: ['Atender bem os clientes', 'Cuidar do caixa'],
+        experience: '1 ano',
     }
-    const [form, setForm] = useState(emptyForm)
+    const [form, setForm] = useState(test)
 
     return (
         <BrowserRouter>

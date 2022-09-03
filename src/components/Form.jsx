@@ -9,6 +9,10 @@ import {
 import { useNavigate } from 'react-router-dom'
 
 function Form({ form, setForm }) {
+    const bonus = JSON.parse(localStorage.getItem('bonus')) || []
+    const phases = JSON.parse(localStorage.getItem('phases')) || []
+    const skills = JSON.parse(localStorage.getItem('skills')) || []
+
     const navigate = useNavigate()
 
     function handleChange(name) {
@@ -64,7 +68,7 @@ function Form({ form, setForm }) {
             <Autocomplete
                 multiple
                 id="tags-filled"
-                options={[]}
+                options={bonus.map((bonus) => bonus)}
                 value={form.bonus}
                 onChange={handleChange('bonus')}
                 defaultValue={[]}
@@ -90,7 +94,7 @@ function Form({ form, setForm }) {
                 multiple
                 required
                 id="tags-filled"
-                options={[]}
+                options={phases.map((phase) => phase)}
                 value={form.phases}
                 onChange={handleChange('phases')}
                 defaultValue={[]}
@@ -116,7 +120,7 @@ function Form({ form, setForm }) {
                 multiple
                 required
                 id="tags-filled"
-                options={[]}
+                options={skills.map((skill) => skill)}
                 value={form.skills}
                 onChange={handleChange('skills')}
                 defaultValue={[]}

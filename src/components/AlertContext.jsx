@@ -12,6 +12,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 export function AlertProvider({ children }) {
     const [message, setMessage] = useState('')
     const [open, setOpen] = useState(false)
+    const [type, setType] = useState('error')
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -23,16 +24,15 @@ export function AlertProvider({ children }) {
     return (
         <AlertContext.Provider
             value={{
-                message,
                 setMessage,
-                open,
                 setOpen,
+                setType,
             }}
         >
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert
                     onClose={handleClose}
-                    severity="error"
+                    severity={type}
                     sx={{ width: '100%' }}
                 >
                     {message}
