@@ -1,9 +1,9 @@
 import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+import * as pdfFonts from 'pdfmake/build/vfs_fonts'
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 function pdfGenerator(form, alignment) {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs
-
     const docDefinitions = {
         pageSize: 'A4',
 
@@ -48,4 +48,5 @@ function pdfGenerator(form, alignment) {
 
     pdfMake.createPdf(docDefinitions).download(form.title)
 }
+
 export default pdfGenerator
