@@ -4,7 +4,7 @@ A web app where you can create a pdf of a job offer to print
 
 ![dona-maria](https://user-images.githubusercontent.com/71580986/188290707-8a4ac2cf-fb4a-49bd-97b1-6012af2db01e.gif)
 
-Try it out now at https:
+Try it out now at https: https://job-generator.vercel.app/
 
 ## About
 
